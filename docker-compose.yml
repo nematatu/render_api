@@ -1,0 +1,10 @@
+version: '3.7' 
+services:
+  express:
+    image: express
+    container_name: docker-express
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - "3000:3000"
