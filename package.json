@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/express": "^5.0.0",
     "body-parser": "^1.20.3",
+    "child_process": "^1.0.2",
     "express": "^4.21.0",
     "node-fetch": "^2.7.0",
     "ts-node": "^10.9.2",
