@@ -6,8 +6,7 @@ RUN apk add --no-cache python3 py3-pip zlib-dev jpeg-dev gcc musl-dev freetype-d
 
 COPY ./index.ts .
 COPY ./package*.json .
-COPY ./Image .
-COPY ./test.py .
+COPY ./OGP ./OGP
 COPY ./requirements.txt . 
 RUN pip install -r requirements.txt
 RUN npm install
