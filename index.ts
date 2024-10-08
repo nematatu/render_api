@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import spawn from 'child_process';
+import fs from 'fs';
 
 const app = express();
 
@@ -66,4 +67,24 @@ app.get('/spawn', async function (req, res, next) {
     }catch(err){
         res.status(500).send(err)
     }
+})
+
+app.post('/image',(req,res)=>{
+    const text=req.body.text || 'default';
+
+    const pythonProcess=spawn.spawn('python3',[`./test.py`,text]);
+    pythonProcess.on('close',(code)=>{
+        const imagePath='Image/pil_text.png';
+        if(fs.existsSync(imagePath)){
+            res.sendFile(imagePath);
+        }else{
+            res.status(500).send('Image not found');
+        }
+    })
+    pythonProcess.on('error', (err) => {
+       res.send(`Failed to start Python process: ${err.message}`);
+    });
+    pythonProcess.stderr.on('data', (data) => {
+        res.send(data.toString())
+    });
 })
